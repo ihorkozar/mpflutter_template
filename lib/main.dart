@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:mpcore/mpcore.dart';
 import 'package:mpflutter_template/second_page.dart';
+import 'package:universal_miniprogram_api/universal_miniprogram_api.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,6 +35,36 @@ class MyHomePage extends StatelessWidget {
           _renderPushNextWidget(context),
           SizedBox(height: 8),
           _renderCallMPJSWidget(context),
+          SizedBox(height: 8),
+          GestureDetector(
+            onTap: () {
+              UniversalMiniProgramApi.uni
+                  .openBluetoothAdapter(OpenBluetoothAdapterOption()
+                    ..setValues(
+                      success: (result) {
+                        print(result);
+                      },
+                      fail: (result) {
+                        print(result);
+                      },
+                    ));
+            },
+            child: Container(
+              width: 200,
+              height: 100,
+              color: Colors.yellow,
+              child: Center(
+                child: Text(
+                  'BLE',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
